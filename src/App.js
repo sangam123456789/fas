@@ -1,49 +1,57 @@
-import './App.css';
-
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useEffect, useState } from "react";
+import Header from "./components/Header";
+import MainContainer from "./components/MainContainer";
+import { Audio } from 'react-loader-spinner'
 
 function App() {
+  const [data, setData] = useState(null)
+  const [ordering, setOrdering] = useState("Priority")
+  const [grouping, setGrouping] = useState("Status")
+
+  let StatusValues = data ? [...new Set(data.tickets.map(ticket => ticket.status))] : null;
+  let PriorityValues = data ? [...new Set(data.tickets.map(ticket => ticket.priority))]: null;
+  let UserIdValues = data ? [...new Set(data.tickets.map(ticket => ticket.userId))]: null;
+  if(PriorityValues) PriorityValues.sort((a, b) => b - a)
+
+  useEffect(() => {
+    fetch("https://api.quicksell.co/v1/internal/frontend-assignment")
+    .then((res) => res.json()).then((data) => setData(data))
+  }, [data]) 
+  
+  const handleOrderingChange = (e) => {
+    console.log(e)
+    setOrdering(e.target.outerText)
+  }
+
+  const handleGroupingChange = (e) => {
+    console.log(e)
+    setGrouping(e.target.outerText)
+  }
   return (
-    <div style={{backgroundColor:'#648aab'}}>
-      <div className="dropdown">
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-  <div className="container-fluid">
-    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-        <li className="nav-item dropdown">
-          <button class="btn btn-secondary dropdown-toggle" style={{padding:'2px',backgroundColor:'#fffcfca6',color:'black',width:'120px'}} type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <b>Display</b>
-          </button>
-          <ul className="dropdown-menu" style={{width : '280px'}}>
-            <li style={{display : 'flex'}}><a className="dropdown-item" style={{width:'150px'}} href="#">Grouping</a>
-                <div className="form-group col-md-4" style={{width:'120px'}}>
-                  <select className="form-control" style={{padding:'2px'}}>
-                    <option value="Status">Status</option>
-                    <option value="User">User</option>
-                    <option value="Priority">Priority</option>
-                  </select>
-                </div>
-            </li>
-            <li style={{display : 'flex'}}><a className="dropdown-item" style={{width:'150px'}} href="#">Ordering</a>
-                <div className="form-group col-md-4" style={{width:'120px'}}>
-                  <select className="form-control" style={{padding:'2px'}}>
-                    <option value="Priority">Priority</option>
-                    <option value="Title">Title</option>
-                  </select>
-                </div>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-      </div>
-    </div>
-  );
+  <div style={{
+    minHeight: "700px",
+    //height: "250%",
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: '#edecec'
+  }}>
+    
+    <Header
+         handleOrderingChange = {handleOrderingChange}
+         handleGroupingChange = {handleGroupingChange}/>
+
+    {data ? <MainContainer UserIdValues = {UserIdValues}PriorityValues = {PriorityValues} StatusValues = {StatusValues} data = {data} ordering = {ordering} grouping = {grouping}/>: 
+     <Audio
+      height="80"
+      width="80"
+      radius="9"
+      color="green"
+      ariaLabel="loading"
+      wrapperStyle
+      wrapperClass
+    />}
+  </div>)
+  
 }
 
 export default App;
