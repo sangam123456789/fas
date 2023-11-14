@@ -2,6 +2,7 @@ import React from 'react'
 import icon from "../utilities/assets/more-info.svg"
 import userphoto from "../utilities/assets/userimages/user.jpg"
 import my from "../utilities/assets/userimages/my.jpg"
+import { nametoicon } from './GroupContainer'
 
 function TicketCart({ticketInfo , Grouping}) {
   return (
@@ -35,10 +36,20 @@ function TicketCart({ticketInfo , Grouping}) {
               borderRadius: "50%"
             }}/>)} 
       </div>
+      <div style={{display:"flex"}}>
+      {(Grouping == "User" || Grouping == "Priority") && (<img src={nametoicon[ticketInfo.status]} style={{
+              //backgroundColor: "black",
+              marginTop: "5px",
+              marginRight: "1px",
+              width: "13px",
+              height: "13px",
+              borderRadius: "50%"
+            }}/>)}
       <div style={{
         fontWeight: "500"
       }}>
         {ticketInfo.title}
+      </div>
       </div>
       <div style={{
         display: "flex"

@@ -11,7 +11,7 @@ import low from "../utilities/assets/priority/low.jpg"
 import medium from "../utilities/assets/priority/medium.jpg"
 import no_priority from "../utilities/assets/priority/no_priority.jpg"
 import urgent from "../utilities/assets/priority/urgent.jpg"
-import userphoto from "../utilities/assets/userimages/user.jpg"
+import my from "../utilities/assets/userimages/second.jpg"
 const nametoicon = {}
 //Status
 nametoicon["In progress"] = inprogress
@@ -27,7 +27,7 @@ nametoicon["0"] = no_priority
 nametoicon["4"] = urgent
 
 function GroupContainer({TicketsArray, ContainerName}) {
-  
+  if(nametoicon[ContainerName] == null)nametoicon[ContainerName]=my
   return (
     <div style={{
       display: "flex",
@@ -42,7 +42,7 @@ function GroupContainer({TicketsArray, ContainerName}) {
         <div style={{
         display: "flex"
         }}>
-          <img style={{height: "15px" , margin: "5px 1rem 0px 0px"}} src={nametoicon[ContainerName]} alt="" />
+          <img style={{width:"15px",borderRadius:"50%",height: "15px" , margin: "5px 1rem 0px 0px"}} src={nametoicon[ContainerName]} alt="" />
           <p style={{
             fontWeight: "500"
           }}>{ContainerName}
@@ -68,5 +68,5 @@ function GroupContainer({TicketsArray, ContainerName}) {
     </div>
   )
 }
-
+export {nametoicon}
 export default GroupContainer
