@@ -49,7 +49,7 @@ function FilterButton({ handleGroupingChange, handleOrderingChange }) {
     localStorage.setItem("orderingLabel", newOrdering);
   };
 
-  useEffect(() => {
+  useEffect(() => {// handling the dropbox closing when clicking outside dropbox 
     const handleOutsideClick = (e) => {
       if (
         isOpenDropDown &&
@@ -86,7 +86,6 @@ function FilterButton({ handleGroupingChange, handleOrderingChange }) {
   }, []); // Empty dependency array to run once on mount
 
   return (
-    // ... (rest of your component remains the same)
     <div className="dropdown" style={{ margin: "1rem 35px" }}>
       <button
         id="button"
