@@ -130,10 +130,10 @@ function FilterButton({handleGroupingChange, handleOrderingChange}) {
                   boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.15)"
                   }}>
                      <div style = {{cursor: "pointer"}} onClick={(e) => handleOrderChangeUtil(e)}>
-                        <b>Priority</b>
+                        Priority
                       </div>
                       <div style = {{cursor: "pointer"}} onClick={(e) => handleOrderChangeUtil(e)}>
-                        <b>Title</b>
+                        Title
                       </div>  
                   </div>
               }

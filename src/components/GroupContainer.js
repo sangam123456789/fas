@@ -1,8 +1,33 @@
 import React from 'react'
 import PlusIcon from "../utilities/assets/plus-solid.svg"
 import MoreInfo from "../utilities/assets/more-info.svg"
+import inprogress from "../utilities/assets/inprogress.jpg"
+import done from "../utilities/assets/done.png"
+import canceled from "../utilities/assets/cancelled.png"
+import backlog from "../utilities/assets/backlog.jpg"
+import todo from "../utilities/assets/todo.png"
+import high from "../utilities/assets/priority/high.jpg"
+import low from "../utilities/assets/priority/low.jpg"
+import medium from "../utilities/assets/priority/medium.jpg"
+import no_priority from "../utilities/assets/priority/no_priority.jpg"
+import urgent from "../utilities/assets/priority/urgent.jpg"
+import userphoto from "../utilities/assets/userimages/user.jpg"
+const nametoicon = {}
+//Status
+nametoicon["In progress"] = inprogress
+nametoicon["Done"] = done
+nametoicon["Canceled"] = canceled
+nametoicon["Backlog"] = backlog
+nametoicon["Todo"] = todo
+//Priority
+nametoicon["3"] = high
+nametoicon["1"] = low
+nametoicon["2"] = medium
+nametoicon["0"] = no_priority
+nametoicon["4"] = urgent
 
 function GroupContainer({TicketsArray, ContainerName}) {
+  
   return (
     <div style={{
       display: "flex",
@@ -17,7 +42,7 @@ function GroupContainer({TicketsArray, ContainerName}) {
         <div style={{
         display: "flex"
         }}>
-          <img style={{height: "15px" , margin: "5px 1rem 0px 0px"}} src={MoreInfo} alt="" />
+          <img style={{height: "15px" , margin: "5px 1rem 0px 0px"}} src={nametoicon[ContainerName]} alt="" />
           <p style={{
             fontWeight: "500"
           }}>{ContainerName}
