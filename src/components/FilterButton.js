@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import FilterIcon from "../utilities/assets/1.png";
 import DropDownIcon from "../utilities/assets/2.png";
+import "../App.css"
 
 function FilterButton({ handleGroupingChange, handleOrderingChange }) {
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
@@ -120,14 +121,14 @@ function FilterButton({ handleGroupingChange, handleOrderingChange }) {
          borderRadius:"5px", 
          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.15)"
        }}>
-          <div style = {{cursor: "pointer"}} onClick={(e) => handleGroupChangeUtil(e)}>
+          <div className="makeblue" style = {{cursor: "pointer"}} onClick={(e) => handleGroupChangeUtil(e)}>
             Priority
           </div>
-          <div  style = {{cursor: "pointer"}} onClick={(e) => handleGroupChangeUtil(e)}>
+          <div className='makeblue' style = {{cursor: "pointer"}} onClick={(e) => handleGroupChangeUtil(e)}>
             Status
           </div>
           
-          <div  style = {{cursor: "pointer"}} onClick={(e) => handleGroupChangeUtil(e)}>
+          <div className='makeblue' style = {{cursor: "pointer"}} onClick={(e) => handleGroupChangeUtil(e)}>
             User
           </div>   
        </div>)}
@@ -157,10 +158,10 @@ function FilterButton({ handleGroupingChange, handleOrderingChange }) {
                   borderRadius:"5px", 
                   boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.15)"
                   }}>
-                     <div style = {{cursor: "pointer"}} onClick={(e) => handleOrderChangeUtil(e)}>
+                     <div className='makeblue' style = {{cursor: "pointer"}} onClick={(e) => handleOrderChangeUtil(e)}>
                         Priority
                       </div>
-                      <div style = {{cursor: "pointer"}} onClick={(e) => handleOrderChangeUtil(e)}>
+                      <div className='makeblue' style = {{cursor: "pointer"}} onClick={(e) => handleOrderChangeUtil(e)}>
                         Title
                       </div>  
                   </div>

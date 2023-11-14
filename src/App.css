@@ -2,6 +2,13 @@
   
 }
 
+.makeblue{
+  background-color: #f7f7f7;
+}
+.makeblue:hover{
+  background-color: rgb(171, 171, 171);
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

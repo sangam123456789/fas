@@ -42,7 +42,7 @@ function GroupContainer({TicketsArray, ContainerName}) {
         <div style={{
         display: "flex"
         }}>
-          <img style={{width:"15px",borderRadius:"50%",height: "15px" , margin: "5px 1rem 0px 0px"}} src={nametoicon[ContainerName]} alt="" />
+          <img style={{width:"15px",borderRadius:"50%",height: "15px" , margin: "5px 10px 0px 0px"}} src={nametoicon[ContainerName]} alt="" />
           <p style={{
             fontWeight: "500"
           }}>{ContainerName}
