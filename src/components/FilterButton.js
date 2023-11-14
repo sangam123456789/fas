@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import FilterIcon from "../utilities/assets/1.png";
 import DropDownIcon from "../utilities/assets/2.png";
-import "../App.css"
+import "../App.css";
 
 function FilterButton({ handleGroupingChange, handleOrderingChange }) {
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
   const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
 
   const [isOpenGroupDropDown, setIsOpenGroupDropDown] = useState(false);
-
   const [isOpenOrderingDropDown, setIsOrderingOpenDropDown] = useState(false);
 
   const [groupingLabel, setGroupingLabel] = useState("Status");
@@ -33,15 +32,21 @@ function FilterButton({ handleGroupingChange, handleOrderingChange }) {
   };
 
   const handleGroupChangeUtil = (e) => {
-    setGroupingLabel(e.target.outerText);
+    const newGrouping = e.target.outerText;
+    setGroupingLabel(newGrouping);
     handleGroupingChange(e);
     setIsOpenGroupDropDown(false);
+    // Store grouping in localStorage
+    localStorage.setItem("groupingLabel", newGrouping);
   };
 
   const handleOrderChangeUtil = (e) => {
-    setOrderingLabel(e.target.outerText);
+    const newOrdering = e.target.outerText;
+    setOrderingLabel(newOrdering);
     handleOrderingChange(e);
     setIsOrderingOpenDropDown(false);
+    // Store ordering in localStorage
+    localStorage.setItem("orderingLabel", newOrdering);
   };
 
   useEffect(() => {
@@ -66,7 +71,22 @@ function FilterButton({ handleGroupingChange, handleOrderingChange }) {
     };
   }, [isOpenDropDown]);
 
+  useEffect(() => {
+    // Retrieve grouping and ordering labels from localStorage on component mount
+    const storedGroupingLabel = localStorage.getItem("groupingLabel");
+    const storedOrderingLabel = localStorage.getItem("orderingLabel");
+
+    if (storedGroupingLabel) {
+      setGroupingLabel(storedGroupingLabel);
+    }
+
+    if (storedOrderingLabel) {
+      setOrderingLabel(storedOrderingLabel);
+    }
+  }, []); // Empty dependency array to run once on mount
+
   return (
+    // ... (rest of your component remains the same)
     <div className="dropdown" style={{ margin: "1rem 35px" }}>
       <button
         id="button"
