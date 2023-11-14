@@ -25,9 +25,18 @@ nametoicon["1"] = low
 nametoicon["2"] = medium
 nametoicon["0"] = no_priority
 nametoicon["4"] = urgent
+//priority name
+const ch = {}
+ch["4"] = "Urgent"
+ch["3"] = "High"
+ch["2"] = "Medium"
+ch["1"] = "Low"
+ch["0"] = "No priority"
 
 function GroupContainer({TicketsArray, ContainerName}) {
   if(nametoicon[ContainerName] == null)nametoicon[ContainerName]=my
+  let x = ch[ContainerName]
+  if(x == null)x = ContainerName
   return (
     <div style={{
       display: "flex",
@@ -35,25 +44,32 @@ function GroupContainer({TicketsArray, ContainerName}) {
       marginLeft: "2rem",
       padding: "1rem"
     }}>
+
       <div style={{
         display: "flex",
         justifyContent: "space-between"
       }}>
+
         <div style={{
         display: "flex"
         }}>
+
           <img style={{width:"15px",borderRadius:"50%",height: "15px" , margin: "5px 10px 0px 0px"}} src={nametoicon[ContainerName]} alt="" />
+          
           <p style={{
             fontWeight: "500"
-          }}>{ContainerName}
+          }}>{x}
           </p>
+
           <p style={{
             marginLeft: "1rem",
             color: "grey" 
           }}>
             {TicketsArray.length}
           </p>
+
         </div>
+        
         <div style={{
           marginLeft: "-1rem",
           display: "flex"
@@ -61,10 +77,13 @@ function GroupContainer({TicketsArray, ContainerName}) {
           <img style={{height: "15px" ,marginRight: "1rem"}} src={PlusIcon} alt="" />
           <img style={{height: "15px"}} src={MoreInfo} alt="" />
         </div>
+
       </div>
+
       <div>
         {TicketsArray} 
       </div>
+      
     </div>
   )
 }

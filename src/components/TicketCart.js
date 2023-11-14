@@ -1,10 +1,10 @@
 import React from 'react'
-import icon from "../utilities/assets/more-info.svg"
-import userphoto from "../utilities/assets/userimages/user.jpg"
 import my from "../utilities/assets/userimages/my.jpg"
 import { nametoicon } from './GroupContainer'
 
 function TicketCart({ticketInfo , Grouping}) {
+  let x = nametoicon[ticketInfo.priority]
+  if(Grouping == "Priority")x = null
   return (
     <div style={{
       backgroundColor: "white",
@@ -40,7 +40,7 @@ function TicketCart({ticketInfo , Grouping}) {
       {(Grouping == "User" || Grouping == "Priority") && (<img src={nametoicon[ticketInfo.status]} style={{
               //backgroundColor: "black",
               marginTop: "5px",
-              marginRight: "1px",
+              marginRight: "3px",
               width: "13px",
               height: "13px",
               borderRadius: "50%"
@@ -54,7 +54,7 @@ function TicketCart({ticketInfo , Grouping}) {
       <div style={{
         display: "flex"
       }}>
-        <img style = {{color: "grey",margin: "5px 5px 2px 0px", height: "20px", padding: "2px", border: "2px solid rgba(128, 128, 128, 0.1)"}}src={icon} alt="" />
+        <img style = {{color: "grey",margin: "5px 5px 2px 0px", height: "20px", padding: "2px", border: "2px solid rgba(128, 128, 128, 0.1)"}} src={x} alt="" />
         <div style={{color: "grey",
             height: "20px",
             padding: "0px 2px 2px 5px",

@@ -1,82 +1,62 @@
-import React, {useEffect, useState} from 'react'
-import GroupContainer from './GroupContainer'
-import TicketCart from './TicketCart'
+import React from 'react';
+import GroupContainer from './GroupContainer';
+import TicketCart from './TicketCart';
 
-function MainContainer({StatusValues,   PriorityValues, UserIdValues, data, ordering, grouping}) {
+function MainContainer({ StatusValues, PriorityValues, UserIdValues, data, ordering, grouping }) {
+  const idtouser = {};
+  data.users.forEach((user) => {
+    idtouser[user.id] = user.name;
+  });
 
-    const idtouser = {}
-    data.users.map((user) => {
-        idtouser[user.id] = user.name
-    })
-    if(ordering == "Priority"){
-        data.tickets.sort((a, b) => b.priority - a.priority)
-    }
-    if(ordering == "Title"){
-        data.tickets.sort((a, b) => a.title.localeCompare(b.title))
-    }
-    let GroupContainerArray = []
+  const grouptovalue = {
+    Status: StatusValues,
+    Priority: PriorityValues,
+    User: UserIdValues,
+  };
 
-if(grouping == "Status"){
-
-    GroupContainerArray = StatusValues.map((groupVal) => {
-        
-        let TicketsArray = data.tickets.map((ticket) => {
-            if(ticket.status == groupVal)
-            {
-                return <TicketCart
-                ticketInfo = {ticket} Grouping = {grouping}/>
-            }
-            else return null
-        })
-
-        TicketsArray = TicketsArray.filter((ticket) => ticket != null)
-        return <GroupContainer TicketsArray = {TicketsArray} ContainerName = {groupVal} />
-    }) 
-}
-
-if(grouping == "Priority"){
   
-    GroupContainerArray = PriorityValues.map((groupVal) => {
-        let TicketsArray = data.tickets.map((ticket) => {
-            if(ticket.priority == groupVal)
-            {
-                return <TicketCart
-                ticketInfo = {ticket} Grouping = {grouping}/>
-            }
-            else return null
-        })
+    if (ordering === 'Priority') {
+      data.tickets.sort((a, b) => b.priority - a.priority);
+    }
+    if (ordering === 'Title') {
+      data.tickets.sort((a, b) => a.title.localeCompare(b.title));
+    }
+  
 
-        TicketsArray = TicketsArray.filter((ticket) => ticket != null)
-        return <GroupContainer TicketsArray = {TicketsArray}  ContainerName = {groupVal}/>
-    }) 
-}
-
-if(grouping == "User"){
-    GroupContainerArray = UserIdValues.map((groupVal) => {
-        let TicketsArray = data.tickets.map((ticket) => {
-            if(ticket.userId == groupVal)
-            {
-                return <TicketCart
-                ticketInfo = {ticket} Grouping = {grouping}/>
-            }
-            else return null
+  const mapTicketsArray = (groupVal, key) =>
+    grouptovalue[grouping].map((val) => {
+      const TicketsArray = data.tickets
+        .map((ticket) => {
+          if ((grouping === 'Status' && ticket.status === val) || (grouping === 'Priority' && ticket.priority === val) || (grouping === 'User' && ticket.userId === val)) {
+            return <TicketCart ticketInfo={ticket} Grouping={grouping}/>;
+          }
+          return null;
         })
-        
-        TicketsArray = TicketsArray.filter((ticket) => ticket != null) 
-        return <GroupContainer TicketsArray = {TicketsArray}  ContainerName = {idtouser[groupVal]}/>
-    }) 
-}
+        .filter(Boolean);
+
+      return <GroupContainer TicketsArray={TicketsArray} ContainerName={key(val)}/>;
+    });
+
+  const keyFunctions = {
+    Status: (val) => val,
+    Priority: (val) => val,
+    User: (val) => idtouser[val],
+  };
+
+  //sortTickets();
 
   return (
-    <div style={{
-        flexGrow: "1",
-        display: "flex",
-        width: "100%",
-        overflow: "auto"
-    }}>
-      {GroupContainerArray}
+    <div
+      style={{
+        flexGrow: '1',
+        display: 'flex',
+        width: '100%',
+        overflow: 'auto',
+      }}
+    >
+      {grouping && mapTicketsArray(grouping, keyFunctions[grouping])}
     </div>
-  )
+  );
 }
 
-export default MainContainer
+export default MainContainer;

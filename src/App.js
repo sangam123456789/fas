@@ -41,15 +41,7 @@ function App() {
          handleGroupingChange = {handleGroupingChange}/>
 
     {data ? <MainContainer UserIdValues = {UserIdValues}PriorityValues = {PriorityValues} StatusValues = {StatusValues} data = {data} ordering = {ordering} grouping = {grouping}/>: 
-     <Audio
-      height="80"
-      width="80"
-      radius="9"
-      color="green"
-      ariaLabel="loading"
-      wrapperStyle
-      wrapperClass
-    />}
+     null}
   </div>)
   
 }
